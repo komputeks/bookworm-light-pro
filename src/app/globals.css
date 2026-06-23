@@ -1,0 +1,171 @@
+@import "tailwindcss";
+
+/* Enable dark mode via class strategy */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ===== Theme tokens — derived from bookworm-light design system ===== */
+@theme {
+  --color-primary: #01ad9f;
+  --color-primary-dark: #018a7f;
+  --color-primary-light: #e6f7f5;
+  --color-body: #ffffff;
+  --color-border: #d5d5d5;
+  --color-theme-light: #fafafa;
+  --color-theme-dark: #152035;
+  --color-text: #747577;
+  --color-text-dark: #152035;
+  --color-text-light: #a1a5ae;
+
+  --font-primary: "Mulish", sans-serif;
+
+  --text-base: 16px;
+  --text-h1: 2.441rem;
+  --text-h2: 1.953rem;
+  --text-h3: 1.563rem;
+  --text-h4: 1.25rem;
+  --text-h5: 1rem;
+  --text-h6: 0.8rem;
+}
+
+/* ===== Base styles ===== */
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--color-body);
+  color: var(--color-text);
+  font-family: var(--font-primary);
+  line-height: 1.7;
+}
+
+.dark body {
+  background-color: var(--color-theme-dark);
+  color: #a1a5ae;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text-dark);
+}
+
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+  color: #ffffff;
+}
+
+h1 { font-size: 1.953rem; }
+@media (min-width: 768px) { h1 { font-size: 2.441rem; } }
+h2 { font-size: 1.563rem; }
+@media (min-width: 768px) { h2 { font-size: 1.953rem; } }
+h3 { font-size: 1.25rem; }
+@media (min-width: 768px) { h3 { font-size: 1.563rem; } }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1rem; }
+h6 { font-size: 0.8rem; }
+
+/* ===== Component utilities ===== */
+@layer components {
+  .btn {
+    @apply inline-block rounded-lg border px-5 py-2 font-semibold transition;
+  }
+  .btn-primary {
+    @apply bg-primary text-white border-primary hover:bg-primary-dark hover:border-primary-dark;
+  }
+  .btn-outline {
+    @apply border-primary bg-transparent text-text-dark hover:bg-primary hover:text-white;
+  }
+  .btn-ghost {
+    @apply border-transparent bg-transparent text-text hover:bg-theme-light;
+  }
+  .section {
+    @apply py-16;
+  }
+  .container-book {
+    @apply mx-auto max-w-[1000px] px-4;
+  }
+  .container-wide {
+    @apply mx-auto max-w-[1200px] px-4;
+  }
+  .card {
+    @apply rounded-lg border border-border bg-white shadow-sm transition hover:shadow-md;
+  }
+  .dark .card {
+    @apply border-gray-700 bg-gray-800;
+  }
+  .input {
+    @apply w-full rounded-lg border border-border bg-white px-4 py-2 text-text-dark outline-none transition focus:border-primary focus:ring-1 focus:ring-primary;
+  }
+  .dark .input {
+    @apply border-gray-600 bg-gray-800 text-white;
+  }
+  .badge {
+    @apply inline-block rounded-full px-3 py-1 text-xs font-semibold;
+  }
+  .badge-primary {
+    @apply bg-primary-light text-primary;
+  }
+}
+
+/* ===== Prose styles for markdown content ===== */
+.prose-bookworm {
+  @apply text-left leading-relaxed;
+}
+.prose-bookworm h2 {
+  @apply mt-8 mb-4;
+}
+.prose-bookworm h3 {
+  @apply mt-6 mb-3;
+}
+.prose-bookworm p {
+  @apply mb-4;
+}
+.prose-bookworm ul {
+  @apply mb-4 list-disc pl-6;
+}
+.prose-bookworm ol {
+  @apply mb-4 list-decimal pl-6;
+}
+.prose-bookworm blockquote {
+  @apply mb-4 border-l-4 border-primary bg-theme-light py-2 pl-4 italic;
+}
+.prose-bookworm pre {
+  @apply mb-4 overflow-x-auto rounded-lg bg-gray-900 p-4 text-sm text-gray-100;
+}
+.prose-bookworm code {
+  @apply rounded bg-gray-100 px-1 py-0.5 text-sm;
+}
+.prose-bookworm pre code {
+  @apply bg-transparent p-0;
+}
+.prose-bookworm a {
+  @apply text-primary underline hover:text-primary-dark;
+}
+.prose-bookworm img {
+  @apply mb-4 rounded-lg;
+}
+
+/* ===== Skeleton loader animation ===== */
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.skeleton {
+  @apply rounded bg-gray-200;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+.dark .skeleton {
+  @apply bg-gray-700;
+}
+
+/* ===== Reading progress bar ===== */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--color-primary);
+  z-index: 100;
+  transition: width 0.1s ease;
+}

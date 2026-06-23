@@ -1,0 +1,22 @@
+name: Sync Cron
+
+on:
+  schedule:
+    # Run every 10 minutes
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger sync
+        env:
+          SYNC_URL: ${{ secrets.SYNC_URL }}
+          SYNC_SECRET: ${{ secrets.SYNC_WORKER_SECRET }}
+        run: |
+          curl -X POST "$SYNC_URL" \
+            -H "x-sync-secret: $SYNC_SECRET" \
+            -H "Content-Type: application/json" \
+            -d '{}' \
+            --max-time 120
