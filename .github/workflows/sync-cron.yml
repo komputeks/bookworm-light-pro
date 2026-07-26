@@ -15,8 +15,12 @@ jobs:
           SYNC_URL: ${{ secrets.SYNC_URL }}
           SYNC_SECRET: ${{ secrets.SYNC_WORKER_SECRET }}
         run: |
-          curl -X POST "$SYNC_URL" \
-            -H "x-sync-secret: $SYNC_SECRET" \
-            -H "Content-Type: application/json" \
-            -d '{}' \
-            --max-time 120
+          if [ -z "$SYNC_URL" ]; then
+            echo "SYNC_URL secret is not configured, skipping sync."
+          else
+            curl -X POST "$SYNC_URL" \
+              -H "x-sync-secret: $SYNC_SECRET" \
+              -H "Content-Type: application/json" \
+              -d '{}' \
+              --max-time 120
+          fi
