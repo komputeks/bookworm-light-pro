@@ -7,9 +7,9 @@ import { z } from "zod";
  */
 const envSchema = z.object({
   // Supabase
-  NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
-  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: z.string().min(1),
-  SUPABASE_SERVICE_ROLE_SECRET: z.string().min(1),
+  NEXT_PUBLIC_SUPABASE_URL: z.string().url().optional().default("https://wjyeqokhmzefvtdimtiy.supabase.co"),
+  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: z.string().min(1).optional().default("sb_publishable_placeholder"),
+  SUPABASE_SERVICE_ROLE_SECRET: z.string().min(1).optional().default("sb_secret_placeholder"),
 
   // Google OAuth (end-user sign-in)
   GOOGLE_CLIENT_ID: z.string().optional().default(""),

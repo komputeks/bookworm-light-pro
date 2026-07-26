@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 import { getPosts } from "@actions/posts";
@@ -39,7 +40,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
         ) : q ? (
           <div className="rounded-lg border border-dashed border-border p-12 text-center dark:border-gray-600">
             <p className="text-lg font-semibold text-text-dark dark:text-white">No results found</p>
-            <p className="text-text">Try different keywords or browse <a href="/blog" className="text-primary underline">all posts</a>.</p>
+            <p className="text-text">Try different keywords or browse <Link href="/blog" className="text-primary underline">all posts</Link>.</p>
           </div>
         ) : null}
 
